@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mis Cursos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='mis_cursos.css') }}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="header">
+            <h2>📖 Mis Cursos</h2>
+        </header>
+
+        <div class="cursos-lista">
+            {% for curso in cursos %}
+            <div class="curso-card">
+                <h3>{{ curso.nombre }}</h3>
+                <p><strong>Docente:</strong> {{ curso.docente }}</p>
+                <p><strong>Horario:</strong> {{ curso.horario }}</p>
+                <p><strong>Estado:</strong> {{ curso.estado }}</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="btn-container">
+            <a href="/dashboard_estudiante" class="btn-volver">⬅ Volver al Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>

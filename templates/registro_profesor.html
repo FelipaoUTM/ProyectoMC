@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Profesor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='registro_profesor.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Registro de Profesor</h2>
+        <form method="POST" action="/registro_profesor">
+            <label for="nombre">Nombre:</label>
+            <input type="text" name="nombre" id="nombre" required>
+
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required>
+
+            <label for="contraseña">Contraseña:</label>
+            <input type="password" name="contraseña" id="contraseña" required>
+
+            <button type="submit" class="btn">Registrarse</button>
+        </form>
+        <p>¿Ya tienes cuenta? <a href="{{ url_for('login_profesor') }}">Inicia sesión aquí</a></p>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,75 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(-45deg, #141E30, #243B55, #4A90E2, #D84336);
+    background-size: 400% 400%;
+    animation: fondoAnimado 10s infinite alternate ease-in-out;
+    color: white;
+    text-align: center;
+}
+
+@keyframes fondoAnimado {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.header {
+    text-align: center;
+    padding: 20px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.dashboard-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+}
+
+.cursos-lista {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.curso-card {
+    background: #4A90E2;
+    padding: 25px;
+    border-radius: 10px;
+    width: 360px;
+    text-align: left;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.curso-card h3 {
+    margin-bottom: 10px;
+}
+
+.curso-card p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.btn-container {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.btn-volver {
+    display: inline-block;
+    background: #FF6F61;
+    padding: 12px 18px;
+    border-radius: 6px;
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-volver:hover {
+    background: #D84336;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Alumnos Inscritos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='alumnos_inscritos.css') }}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="header">
+            <h2>🏅 Alumnos Inscritos</h2>
+        </header>
+
+        <div class="cursos-lista">
+            {% for curso in cursos %}
+            <div class="curso-card">
+                <h3>{{ curso.nombre }}</h3>
+                <p><strong>Descripción:</strong> {{ curso.descripcion }}</p>
+                <p><strong>Horario:</strong> {{ curso.horario }}</p>
+                <p><strong>Cupos:</strong> {{ curso.cupos }}</p>
+                <p><strong>Estado:</strong> {{ curso.estado }}</p>
+
+                <div class="alumnos-lista">
+                    <h4>📌 Estudiantes Matriculados:</h4>
+                    <ul>
+                        {% for alumno in curso.estudiantes %}
+                        <li>{{ alumno.nombre }} - {{ alumno.correo }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="btn-container">
+            <a href="/dashboard_profesor" class="btn-volver">⬅ Volver al Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>

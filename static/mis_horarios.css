@@ -1,0 +1,87 @@
+/* 🔥 Fondo animado */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(-45deg, #141E30, #243B55, #4A90E2, #D84336);
+    background-size: 400% 400%;
+    animation: fondoAnimado 10s infinite alternate ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* 🔥 Animación de fondo */
+@keyframes fondoAnimado {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 📅 Contenedor principal */
+.horarios-wrapper {
+    width: 80%;
+    max-width: 800px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    text-align: center;
+}
+
+/* 📅 Encabezado */
+.horarios-header h1 {
+    color: white;
+    font-size: 28px;
+}
+
+/* 📅 Estilos de tabla */
+.horarios-tabla {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.horarios-tabla th, .horarios-tabla td {
+    padding: 12px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.horarios-tabla thead th {
+    background: #007bff;
+    font-size: 18px;
+    color: white;
+    border-bottom: 2px solid #004080;
+}
+
+.horarios-tabla tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.horarios-tabla tbody tr:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transition: 0.3s;
+}
+
+/* 📅 Botón de regreso */
+.btn-container {
+    margin-top: 20px;
+}
+
+.btn-volver {
+    display: inline-block;
+    background: #FF6F61;
+    padding: 12px 18px;
+    border-radius: 6px;
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-volver:hover {
+    background: #D84336;
+    transition: 0.3s;
+}

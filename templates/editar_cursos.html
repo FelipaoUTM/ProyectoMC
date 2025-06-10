@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Administrar Cursos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='editar_cursos.css') }}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="header">
+            <h2>📌 Administrar Cursos</h2>
+        </header>
+
+        <div class="cursos-lista">
+            {% for curso in cursos %}
+            <div class="curso-card">
+                <form action="/actualizar_curso" method="POST">
+                    <input type="hidden" name="curso_id" value="{{ curso.id }}">
+
+                    <label>Nombre del Curso:</label>
+                    <input type="text" name="nombre" value="{{ curso.nombre }}" required>
+
+                    <label>Descripción:</label>
+                    <textarea name="descripcion" required>{{ curso.descripcion }}</textarea>
+
+                    <label>Cupos Disponibles:</label>
+                    <input type="number" name="cupos" value="{{ curso.cupos }}" required>
+
+                    <label>Estado del Curso:</label>
+                    <select name="estado" required>
+                        <option value="Activo" {% if curso.estado == 'Activo' %}selected{% endif %}>Activo</option>
+                        <option value="Inactivo" {% if curso.estado == 'Inactivo' %}selected{% endif %}>Inactivo</option>
+                    </select>
+
+                    <label>Horario:</label>
+                    <input type="text" name="horario" value="{{ curso.horario }}" required>
+
+                    <button type="submit" class="btn-guardar">💾 Guardar Cambios</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="btn-container">
+            <a href="/dashboard_profesor" class="btn-volver">⬅ Volver al Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>

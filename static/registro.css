@@ -1,0 +1,92 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(-45deg, #141E30, #243B55, #4A90E2, #D84336);
+    background-size: 400% 400%;
+    animation: fondoAnimado 10s infinite alternate ease-in-out;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+@keyframes fondoAnimado {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.form-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+h2 {
+    color: #FFD700;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-size: 18px;
+    margin-top: 10px;
+    color: white;
+    text-align: left;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.btn-registrar {
+    background: #FFD700;
+    padding: 12px 18px;
+    border-radius: 6px;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    margin-top: 15px;
+    display: block;
+    width: 100%;
+}
+
+.btn-registrar:hover {
+    background: #E6C200;
+}
+
+.btn-volver {
+    display: inline-block;
+    background: #FF6F61;
+    padding: 12px 18px;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.btn-volver:hover {
+    background: #D84336;
+}

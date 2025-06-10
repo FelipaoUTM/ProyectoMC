@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Profesor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard_profesor.css') }}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="header">
+            <h2>📖 Bienvenido Profesor📖</h2>
+            <h3>{{ profesor_nombre }}</h3>
+            
+    
+    <a href="/logout" class="btn-logout">🚪 Cerrar Sesión</a>
+        </header>
+
+        <div class="options-container">
+            <a href="/cursos_profesor" class="option-card">
+                <h3>📚 Cursos Asignados</h3>
+                <p>Consulta los cursos que tienes asignados.</p>
+            </a>
+
+            <a href="/alumnos_inscritos" class="option-card">
+                <h3>🏅 Alumnos Inscritos</h3>
+                <p>Revisa la lista de estudiantes en tus cursos.</p>
+            </a>
+
+            <a href="/editar_cursos" class="option-card">
+                <h3>📌 Administrar Cursos</h3>
+                <p>Gestiona y edita los cursos que impartes, incluyendo horarios.</p>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Estudiante</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard_estudiante.css') }}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="header">
+            <h2>📌 Panel Estudiante</h2>
+        </header>
+
+        <div class="bienvenida">
+            <h3>👋 Bienvenido/a, {{ usuario }}</h3>
+        </div>
+
+        <div class="options-container">
+            <a href="/mis_cursos" class="option-card">
+                <h3>📚 Mis Cursos</h3>
+                <p>Consulta los cursos en los que estás inscrito.</p>
+            </a>
+            <a href="/mis_horarios" class="option-card">
+                <h3>🕒 Mis Horarios</h3>
+                <p>Revisa tu horario de clases actualizado.</p>
+            </a>
+            <a href="/contacto_docente" class="option-card">
+                <h3>📩 Contactar con Docente</h3>
+                <p>Envía un mensaje o consulta información de tu profesor.</p>
+            </a>
+        </div>
+
+        <a href="/matriculacion" class="matricula-card">
+            <h3>🎓 Matricularme</h3>
+            <p>Click aquí para ingresar al sistema de matriculación.</p>
+        </a>
+
+        <a href="/logout" class="logout-btn">Cerrar Sesión</a>
+    </div>
+</body>
+</html>

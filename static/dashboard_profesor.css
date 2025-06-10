@@ -1,0 +1,78 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(-45deg, #141E30, #243B55, #4A90E2, #D84336);
+    background-size: 400% 400%;
+    animation: fondoAnimado 10s infinite alternate ease-in-out;
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+@keyframes fondoAnimado {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.header {
+    position: relative;
+    text-align: center;
+    padding: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    margin-bottom: 20px;
+}
+
+.header h3 {
+    font-size: 22px;
+    margin-top: 5px;
+    color: #FFD700;
+}
+
+.btn-logout {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: #FF6F61;
+    padding: 10px 15px;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-logout:hover {
+    background: #D84336;
+}
+
+.options-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.option-card {
+    background: #4A90E2;
+    padding: 30px;
+    border-radius: 10px;
+    width: 320px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    text-decoration: none;
+    color: white;
+    transition: 0.3s;
+}
+
+.option-card:hover {
+    background: #357ABD;
+    transform: scale(1.07);
+}
+

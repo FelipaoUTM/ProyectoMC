@@ -1,0 +1,92 @@
+/* 🔥 Fondo animado con transición fluida */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(-45deg, #141E30, #243B55, #4A90E2, #D84336);
+    background-size: 400% 400%;
+    animation: fondoAnimado 10s infinite alternate ease-in-out;
+    color: white;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* 🔹 Animación del fondo */
+@keyframes fondoAnimado {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 🔹 Contenedor del login */
+.login-container {
+    width: 100%;
+    max-width: 400px;
+}
+
+/* 🔹 Tarjeta del formulario */
+.login-card {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
+    text-align: center;
+    max-width: 350px; /* 🔹 Mantiene los inputs dentro del rectángulo */
+    width: 100%;
+}
+
+/* 🔹 Título */
+h2 {
+    color: #ffffff;
+}
+
+/* 🔹 Estilos de etiquetas y campos de entrada */
+label {
+    color: white;  /* 🔹 Texto blanco para "Correo Electrónico" y "Contraseña" */
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #444;
+    color: white; /* 🔹 Letras dentro del campo en blanco */
+    box-sizing: border-box; /* 🔹 Evita que los inputs se salgan del rectángulo */
+}
+
+/* 🔹 Botón de inicio de sesión */
+button {
+    width: 100%;
+    background: #007bff;
+    color: white;
+    padding: 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: 0.3s ease-in-out;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+/* 🔹 Estilos de enlaces */
+.btn-register, .btn-teacher {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    color: #00bfff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-register:hover, .btn-teacher:hover {
+    color: #ffcc00;
+}

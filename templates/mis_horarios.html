@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mis Horarios</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='mis_horarios.css') }}">
+</head>
+<body>
+    <div class="horarios-wrapper">
+        <div class="horarios-header">
+            <h1>📅 Horarios de {{ usuario }}</h1>
+        </div>
+
+        <div class="horarios-container">
+            <table class="horarios-tabla">
+                <thead>
+                    <tr>
+                        <th>Materia</th>
+                        <th>Día y Hora</th> <!-- 🔹 Ahora día y hora están juntos -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for horario in horarios %}
+                    <tr>
+                        <td>{{ horario[0] }}</td>
+                        <td>{{ horario[1] }} - {{ horario[2] }}</td> <!-- 🔹 Se combina día y hora -->
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="btn-container">
+            <a href="{{ url_for('dashboard_estudiante') }}" class="btn-volver">⬅️ Volver al Panel</a>
+        </div>
+    </div>
+</body>
+</html>
