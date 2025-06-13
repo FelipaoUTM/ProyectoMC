@@ -24,10 +24,6 @@
                 <h3>🕒 Mis Horarios</h3>
                 <p>Revisa tu horario de clases actualizado.</p>
             </a>
-            <a href="/contacto_docente" class="option-card">
-                <h3>📩 Contactar con Docente</h3>
-                <p>Envía un mensaje o consulta información de tu profesor.</p>
-            </a>
         </div>
 
         <a href="/matriculacion" class="matricula-card">
@@ -35,7 +31,16 @@
             <p>Click aquí para ingresar al sistema de matriculación.</p>
         </a>
 
+        <!-- 🔹 Nueva opción: Descargar reporte en PDF -->
+        <div class="options-container">
+            <a href="{{ url_for('reporte_estudiante') }}" class="option-card">
+                <h3>📄 Reporte PDF</h3>
+                <p>Descarga un informe con tus materias matriculadas.</p>
+            </a>
+        </div>
+
         <a href="/logout" class="logout-btn">Cerrar Sesión</a>
     </div>
 </body>
 </html>
+

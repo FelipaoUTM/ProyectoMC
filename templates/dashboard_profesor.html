@@ -11,8 +11,7 @@
             <h2>📖 Bienvenido Profesor📖</h2>
             <h3>{{ profesor_nombre }}</h3>
             
-    
-    <a href="/logout" class="btn-logout">🚪 Cerrar Sesión</a>
+            <a href="/logout" class="btn-logout">🚪 Cerrar Sesión</a>
         </header>
 
         <div class="options-container">
@@ -31,6 +30,24 @@
                 <p>Gestiona y edita los cursos que impartes, incluyendo horarios.</p>
             </a>
         </div>
+
+        <!-- 🔹 Nueva opción: Descargar reporte en PDF -->
+        <div class="options-container">
+            <a href="{{ url_for('reporte_profesor') }}" class="option-card">
+                <h3>📄 Reporte PDF</h3>
+                <p>Descarga un informe con tus materias establecidas.</p>
+            </a>
+        </div>
+
+        <!-- 🔹 Nuevo botón: Registrar nueva materia -->
+        <div class="options-container">
+            <a href="{{ url_for('registro_materia') }}" class="option-card">
+                <h3>🆕 Registrar Nueva Materia</h3>
+                <p>Agrega una materia nueva a tu lista de cursos.</p>
+            </a>
+        </div>
+
     </div>
 </body>
 </html>
+

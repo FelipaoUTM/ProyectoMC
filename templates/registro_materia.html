@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Nueva Materia</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='registro_materia.css') }}">
+</head>
+<body>
+    <div class="registro-container">
+        <header class="header">
+            <h2>🆕 Registrar Nueva Materia</h2>
+            <p>Completa la información de la materia que impartirás.</p>
+        </header>
+        
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-success">{{ messages[0] }}</div>
+        {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            <label for="nombre_materia">📖 Nombre de la Materia:</label>
+            <input type="text" name="nombre_materia" placeholder="Ejemplo: Programación Avanzada" required>
+
+            <label for="descripcion">📌 Descripción:</label>
+            <input type="text" name="descripcion" placeholder="Ejemplo: Análisis y desarrollo de software" required>
+
+            <label for="cupos">🎓 Cupos disponibles:</label>
+            <input type="number" name="cupos" min="1" placeholder="Ejemplo: 30" required>
+
+            <label for="horario">⏰ Horario:</label>
+            <input type="text" name="horario" placeholder="Ejemplo: Lunes y Miércoles 10AM - 12PM" required>
+
+            <button type="submit" class="btn btn-success">✅ Registrar Materia</button>
+        </form>
+
+        <a href="{{ url_for('dashboard_profesor') }}" class="btn btn-secondary">⬅ Volver al Panel</a>
+    </div>
+</body>
+</html>

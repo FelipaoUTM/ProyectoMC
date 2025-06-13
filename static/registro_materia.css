@@ -1,20 +1,17 @@
-/* Estilos generales */
 body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(45deg, #007bff, #00c6ff);
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(-45deg, #141E30, #243B55, #4A90E2, #D84336);
     background-size: 400% 400%;
-    animation: animacion-fondo 10s infinite alternate;
-    color: #fff;
-    margin: 0;
-    padding: 0;
+    animation: fondoAnimado 10s infinite alternate ease-in-out;
+    color: white;
+    text-align: center;
 }
 
-/* Animación de fondo */
-@keyframes animacion-fondo {
-    0% { background-position: 0% 0%; }
-    100% { background-position: 100% 100%; }
+@keyframes fondoAnimado {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
-
 /* Contenedor principal */
 .registro-container {
     width: 40%;

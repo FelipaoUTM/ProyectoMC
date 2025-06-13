@@ -1,8 +1,12 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
+from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify, send_file
 from flask_mysqldb import MySQL
 from werkzeug.security import generate_password_hash, check_password_hash
 import hashlib
 import pyscrypt  # 🔹 Instala pyscrypt con `pip install pyscrypt`
+
+from flask import send_file
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
 
 def verificar_contraseña(password_plain, password_hashed):
     return hashlib.sha256(password_plain.encode()).hexdigest() == password_hashed
@@ -20,7 +24,7 @@ app.config['MYSQL_PORT'] = 3306  # 🚀 Puerto configurado
 mysql = MySQL(app)
 
 
-#------------------REGISTRO ESTUDIANTES--------------#
+#------------------REGISTRO --------------#
 # 🔹 Ruta de registro
 @app.route('/registro')
 def registro():
@@ -95,6 +99,7 @@ def login_profesor():
         if profesor and verificar_contraseña(contraseña, profesor[3]):
             session['profesor_id'] = profesor[0]
             session['profesor_nombre'] = profesor[1]
+            print(f"✅ Profesor autenticado, ID: {session['profesor_id']}")  #
             return redirect(url_for('dashboard_profesor'))
         else:
             flash('Correo o contraseña incorrectos')
@@ -322,6 +327,40 @@ def matricular():
 
     return redirect(url_for('login_estudiante'))
 
+#------------------REGISTRO MATERIA----------#
+@app.route('/registro_materia', methods=['GET', 'POST'])
+def registro_materia():
+    if request.method == 'POST':
+        nombre_materia = request.form['nombre_materia']
+        descripcion = request.form['descripcion']
+        cupos = request.form['cupos']
+        horario = request.form['horario']
+        profesor_id = session.get('profesor_id')  # 🔹 Usamos `profesor_id` en sesión
+
+        if not profesor_id:
+            flash("❌ Error: No se ha encontrado el ID del profesor en sesión.")
+            return redirect(url_for('dashboard_profesor'))
+
+        cur = mysql.connection.cursor()
+        try:
+            cur.execute("""
+                INSERT INTO cursos (nombre, descripcion, profesor_id, cupos, estado, horario) 
+                VALUES (%s, %s, %s, %s, %s, %s)
+            """, (nombre_materia, descripcion, profesor_id, cupos, 'Activo', horario))
+            mysql.connection.commit()
+            print(f"✅ Materia '{nombre_materia}' guardada con `profesor_id`: {profesor_id}")
+            flash("✅ Materia registrada exitosamente y vinculada al profesor.")
+        except Exception as e:
+            print(f"❌ Error al registrar materia: {e}")
+            flash("❌ Ocurrió un problema al guardar la materia.")
+        finally:
+            cur.close()
+
+        return redirect(url_for('dashboard_profesor'))
+
+    return render_template('registro_materia.html')
+
+
 #------------------ MIS HORARIOS -------------#
 @app.route('/mis_horarios')
 def mis_horarios():
@@ -338,6 +377,97 @@ def mis_horarios():
     return redirect(url_for('login_estudiante'))
 
 
+#---------REPORTE ESTUDIANTE------------------#
+@app.route('/reporte_estudiante')
+def reporte_estudiante():
+    if 'usuario_id' in session:
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT nombre, horario FROM cursos WHERE id IN (SELECT curso_id FROM matriculas WHERE usuario_id = %s)", (session['usuario_id'],))
+        cursos_inscritos = cur.fetchall()
+        cur.close()
+
+        # Crear el PDF
+        filename = f"reporte_estudiante_{session['usuario_id']}.pdf"
+        pdf = canvas.Canvas(filename, pagesize=letter)
+        pdf.setTitle("Reporte de Materias Matriculadas")
+
+        # Encabezado
+        pdf.setFont("Helvetica-Bold", 18)
+        pdf.drawString(200, 750, "📚 Reporte de Materias Matriculadas")
+
+        # Datos del estudiante
+        pdf.setFont("Helvetica", 14)
+        pdf.drawString(50, 720, f"Estudiante: {session['usuario_nombre']}")
+
+        y = 690
+        pdf.setFont("Helvetica-Bold", 12)
+        pdf.drawString(50, y, "Materia")
+        pdf.drawString(300, y, "Horario")
+        y -= 30
+
+        pdf.setFont("Helvetica", 12)
+        for curso in cursos_inscritos:
+            pdf.drawString(50, y, curso[0])
+            pdf.drawString(300, y, curso[1])
+            y -= 20
+
+        pdf.save()
+        return send_file(filename, as_attachment=True)
+
+    return redirect(url_for('login'))
+
+
+#----------------- REPORTE PROFESOR-------------#
+@app.route('/reporte_profesor')
+def reporte_profesor():
+    if 'profesor_id' in session:
+        cur = mysql.connection.cursor()
+
+        # 🔹 Obtener los datos del profesor
+        cur.execute("SELECT id, nombre, email FROM profesores WHERE id = %s", (session['profesor_id'],))
+        profesor = cur.fetchone()
+
+        # 🔹 Obtener materias asignadas al profesor
+        cur.execute("SELECT nombre, horario FROM cursos WHERE profesor_id = %s", (session['profesor_id'],))
+        materias = cur.fetchall()
+        cur.close()
+
+        # 🔹 Verificación de datos
+        if not profesor:
+            flash("❌ No se encontró el profesor en la base de datos.")
+            return redirect(url_for('dashboard_profesor'))
+        
+        if not materias:
+            flash("❌ No tienes materias registradas.")
+            return redirect(url_for('dashboard_profesor'))
+
+        # 🔹 Crear el PDF
+        filename = f"reporte_profesor_{session['profesor_id']}.pdf"
+        pdf = canvas.Canvas(filename, pagesize=letter)
+        pdf.setTitle("Reporte de Materias del Profesor")
+
+        pdf.setFont("Helvetica-Bold", 18)
+        pdf.drawString(200, 750, "📄 Reporte de Materias")
+        pdf.setFont("Helvetica", 14)
+        pdf.drawString(50, 720, f"Profesor: {profesor[1]} ({profesor[2]})")  
+
+        y = 690
+        pdf.setFont("Helvetica-Bold", 12)
+        pdf.drawString(50, y, "Materia")
+        pdf.drawString(300, y, "Horario")
+        y -= 30
+
+        pdf.setFont("Helvetica", 12)
+        for materia in materias:
+            pdf.drawString(50, y, materia[0])
+            pdf.drawString(300, y, materia[1])
+            y -= 20
+
+        pdf.save()
+        return send_file(filename, as_attachment=True, mimetype='application/pdf')
+
+    flash("❌ Sesión no válida. Inicia sesión nuevamente.")
+    return redirect(url_for('login_profesor'))
 # ----------------- LOGOUT ---------------- #
 @app.route('/logout')
 def logout():
